@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cbqh45f5gw7r3" path="res://car.tscn" id="3_75fcj"]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(3, 632)
 
 [node name="Map" parent="." instance=ExtResource("2_fjnwi")]
 
@@ -12,5 +13,7 @@
 position = Vector2(-98, -194)
 scale = Vector2(0.36, 0.36)
 
-[node name="Player" parent="." instance=ExtResource("1_fx3ey")]
+[node name="Player" type="Node2D" parent="."]
+
+[node name="Player" parent="Player" instance=ExtResource("1_fx3ey")]
 position = Vector2(79, -50)

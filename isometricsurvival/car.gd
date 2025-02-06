@@ -1,87 +1,77 @@
-extends Area2D
+extends CharacterBody2D
 
-# Переменные для управления машинкой
 @export var max_speed: float = 300.0
 @export var acceleration: float = 200.0
 @export var friction: float = 100.0
 @export var rotation_speed: float = 2.0
-
-var velocity: Vector2 = Vector2.ZERO
 var is_player_inside: bool = false
 var player = null
+var in_zone = false
+var speed = 0
+var decerelation = 500
 
-# Ссылка на камеру (если она есть у машинки)
 @onready var camera = $Camera2D
 
-func _ready():
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
-
-# Игрок вошёл в зону машинки
-func _on_body_entered(body):
-	if body.name == "Player":
-		player = body
-		print("Игрок рядом с машинкой! Нажми E, чтобы сесть.")
-
-# Игрок вышел из зоны машинки
-func _on_body_exited(body):
-	if body.name == "Player":
-		player = null
-		print("Игрок ушёл от машинки.")
-
-# Обработка ввода (например, нажатие E)
 func _input(event):
-	if event.is_action_pressed("ui_interact") and player:
-		if is_player_inside:
+	if event.is_action_pressed("ui_interact"):
+		if is_player_inside and player:
 			exit_car()
 		else:
 			enter_car()
 
-# Логика "посадки" в машинку
 func enter_car():
-	print("Игрок сел в машинку!")
-	is_player_inside = true
-	player.hide()  # Скрываем игрока
-	if camera:
-		camera.make_current()  # Переключаем камеру на машинку
+	if in_zone:
+		$CollisionShape2D.disabled = true
+		is_player_inside = true
+		player.hide()  
+		if camera:
+			camera.make_current()  
 
-# Логика "выхода" из машинки
 func exit_car():
-	print("Игрок вышел из машинки!")
+	$CollisionShape2D.disabled = false
 	is_player_inside = false
-	player.show()  # Показываем игрока
-	player.global_position = global_position  # Игрок появляется рядом с машинкой
+	player.show()  
+	player.global_position = global_position  
 	if camera:
-		player.get_node("Camera2D").make_current()  # Переключаем камеру на игрока
+		player.get_node("Camera2D").make_current() 
 
-# Управление машинкой
 func _process(delta):
 	if is_player_inside:
 		handle_movement(delta)
+	if is_player_inside and player != null:
+		player.global_position = global_position
+		
 
-# Логика движения машинки
 func handle_movement(delta):
-	var direction = Vector2.ZERO
-
-	# Управление вперёд/назад
+	var direction = Vector2(0,0)
+	
 	if Input.is_action_pressed("player_up"):
 		direction.y -= 1
 	if Input.is_action_pressed("player_down"):
 		direction.y += 1
-
-	# Управление поворотом
 	if Input.is_action_pressed("player_left"):
-		rotation -= rotation_speed * delta
+		direction.x -= 1
 	if Input.is_action_pressed("player_right"):
-		rotation += rotation_speed * delta
+		direction.x += 1
+	direction = direction.normalized()
 
-	# Применяем ускорение
 	if direction != Vector2.ZERO:
-		velocity += direction.rotated(rotation) * acceleration * delta
-		velocity = velocity.limit_length(max_speed)
+		rotation = lerp_angle(rotation, direction.angle(), rotation_speed * delta)
+		velocity = Vector2(max_speed,0).rotated(rotation)
+		speed +=acceleration * delta
+		speed = min(speed, max_speed)
 	else:
-		# Применяем трение
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		speed -= decerelation * delta
+		speed = min(speed, max_speed)
+	move_and_slide()
 
-	# Двигаем машинку
-	
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.name == "Player":
+		in_zone = true
+		player = body
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.name == "Player":
+		in_zone = false
+		player = null

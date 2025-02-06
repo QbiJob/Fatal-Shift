@@ -5,7 +5,7 @@ extends CharacterBody2D  # Или KinematicBody2D для Godot 3.x
 
 # Ссылка на AnimatedSprite2D (укажите правильный путь к узлу)
 @onready var animated_sprite = $AnimatedSprite2D
-
+@onready var collison = $CollisionShape2D
 # Ссылка на Camera2D
 @onready var camera = $Camera2D
 

@@ -6,6 +6,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_nb6kv"]
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_01llm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
