@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgsvkluxbolgs"
-path="res://.godot/imported/CarTest.png-6843f5e7c6737ec3cea7d48c504f6ba0.ctex"
+uid="uid://f2dwdt50uttu"
+path="res://.godot/imported/father.png-ba28ba89de12bc29b9acdf4bb99b1453.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CarTest.png"
-dest_files=["res://.godot/imported/CarTest.png-6843f5e7c6737ec3cea7d48c504f6ba0.ctex"]
+source_file="res://Arts/entity/man/father.png"
+dest_files=["res://.godot/imported/father.png-ba28ba89de12bc29b9acdf4bb99b1453.ctex"]
 
 [params]
 

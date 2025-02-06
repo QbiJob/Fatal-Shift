@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsa08p85frton"]
+
+[ext_resource type="PackedScene" uid="uid://dum7r83nekogc" path="res://scene/Levels/Test/map.tscn" id="1_xlvgs"]
+[ext_resource type="PackedScene" uid="uid://cbqh45f5gw7r3" path="res://elements/transport/car/car.tscn" id="2_1bdlu"]
+[ext_resource type="PackedScene" uid="uid://b66ftkw2o0wik" path="res://elements/entity/player/player.tscn" id="3_r5m6b"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Map" parent="." instance=ExtResource("1_xlvgs")]
+
+[node name="Car" parent="." instance=ExtResource("2_1bdlu")]
+position = Vector2(-98, -194)
+scale = Vector2(0.36, 0.36)
+
+[node name="Player" parent="." instance=ExtResource("3_r5m6b")]
+position = Vector2(79, -50)
