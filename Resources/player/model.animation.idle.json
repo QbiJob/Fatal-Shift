@@ -1,0 +1,67 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.model.idle": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"Body": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"2.0": {
+							"vector": [2.5, 0, 0]
+						},
+						"4.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"Chest": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"2.0": {
+							"vector": [-2.5, 0, 0]
+						},
+						"4.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"Arm1": {
+					"rotation": {
+						"vector": [0, 0, -7.5]
+					}
+				},
+				"Arm2": {
+					"rotation": {
+						"vector": [-4.95744, 0.65182, 7.47178]
+					}
+				},
+				"Arm3": {
+					"rotation": {
+						"vector": [0, 0, 7.5]
+					}
+				},
+				"Arm4": {
+					"rotation": {
+						"vector": [-4.95744, -0.65182, -7.47178]
+					}
+				},
+				"Leg1": {
+					"rotation": {
+						"vector": [0, -7.49814, -2.5]
+					}
+				},
+				"Leg3": {
+					"rotation": {
+						"vector": [0, 9.99628, 2.5]
+					}
+				}
+			}
+		}
+	}
+}
